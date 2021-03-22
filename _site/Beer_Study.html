@@ -290,7 +290,8 @@ library(dplyr)</code></pre>
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:plyr&#39;:
 ## 
-##     arrange, count, desc, failwith, id, mutate, rename, summarise, summarize</code></pre>
+##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+##     summarize</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
 ## 
 ##     filter, lag</code></pre>
@@ -299,11 +300,11 @@ library(dplyr)</code></pre>
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(ggthemes)
 library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ tibble  3.0.4     ✓ purrr   0.3.4
 ## ✓ tidyr   1.1.2     ✓ forcats 0.5.0
 ## ✓ readr   1.4.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::arrange()   masks plyr::arrange()
 ## x purrr::compact()   masks plyr::compact()
 ## x dplyr::count()     masks plyr::count()
@@ -462,35 +463,49 @@ str(beers_merge)</code></pre>
 ##  $ State       : Factor w/ 51 levels &quot; AK&quot;,&quot; AL&quot;,&quot; AR&quot;,..: 24 24 24 24 24 24 23 36 18 18 ...</code></pre>
 <pre class="r"><code>#Display first and last 6 values in merged data set
 head(beers_merge,6)</code></pre>
-<pre><code>##   Brewery_id     Beer_Name Beer_ID   ABV IBU                               Style Ounces
-## 1          1  Get Together    2692 0.045  50                        American IPA     16
-## 2          1 Maggie&#39;s Leap    2691 0.049  26                  Milk / Sweet Stout     16
-## 3          1    Wall&#39;s End    2690 0.048  19                   English Brown Ale     16
-## 4          1       Pumpion    2689 0.060  38                         Pumpkin Ale     16
-## 5          1    Stronghold    2688 0.060  25                     American Porter     16
-## 6          1   Parapet ESB    2687 0.056  47 Extra Special / Strong Bitter (ESB)     16
-##         Brewery_Name        City State
-## 1 NorthGate Brewing  Minneapolis    MN
-## 2 NorthGate Brewing  Minneapolis    MN
-## 3 NorthGate Brewing  Minneapolis    MN
-## 4 NorthGate Brewing  Minneapolis    MN
-## 5 NorthGate Brewing  Minneapolis    MN
-## 6 NorthGate Brewing  Minneapolis    MN</code></pre>
+<pre><code>##   Brewery_id     Beer_Name Beer_ID   ABV IBU
+## 1          1  Get Together    2692 0.045  50
+## 2          1 Maggie&#39;s Leap    2691 0.049  26
+## 3          1    Wall&#39;s End    2690 0.048  19
+## 4          1       Pumpion    2689 0.060  38
+## 5          1    Stronghold    2688 0.060  25
+## 6          1   Parapet ESB    2687 0.056  47
+##                                 Style Ounces       Brewery_Name        City
+## 1                        American IPA     16 NorthGate Brewing  Minneapolis
+## 2                  Milk / Sweet Stout     16 NorthGate Brewing  Minneapolis
+## 3                   English Brown Ale     16 NorthGate Brewing  Minneapolis
+## 4                         Pumpkin Ale     16 NorthGate Brewing  Minneapolis
+## 5                     American Porter     16 NorthGate Brewing  Minneapolis
+## 6 Extra Special / Strong Bitter (ESB)     16 NorthGate Brewing  Minneapolis
+##   State
+## 1    MN
+## 2    MN
+## 3    MN
+## 4    MN
+## 5    MN
+## 6    MN</code></pre>
 <pre class="r"><code>tail(beers_merge,6)</code></pre>
-<pre><code>##      Brewery_id                      Beer_Name Beer_ID   ABV IBU                          Style
-## 2405         98         Troegenator Doublebock    1510 0.082  25                     Doppelbock
-## 2406         98                  Perpetual IPA    1509 0.075  85                   American IPA
-## 2407         99                    Cortez Gold    2442 0.050  NA               Belgian Pale Ale
-## 2408         99                    Mission IPA    2441 0.068  66                   American IPA
-## 2409         99 El Conquistador Extra Pale Ale    1460 0.048  44        American Pale Ale (APA)
-## 2410         99         Shipwrecked Double IPA    1459 0.092  75 American Double / Imperial IPA
-##      Ounces           Brewery_Name      City State
-## 2405     16 Tröegs Brewing Company   Hershey    PA
-## 2406     12 Tröegs Brewing Company   Hershey    PA
-## 2407     32        Mission Brewery San Diego    CA
-## 2408     32        Mission Brewery San Diego    CA
-## 2409     32        Mission Brewery San Diego    CA
-## 2410     32        Mission Brewery San Diego    CA</code></pre>
+<pre><code>##      Brewery_id                      Beer_Name Beer_ID   ABV IBU
+## 2405         98         Troegenator Doublebock    1510 0.082  25
+## 2406         98                  Perpetual IPA    1509 0.075  85
+## 2407         99                    Cortez Gold    2442 0.050  NA
+## 2408         99                    Mission IPA    2441 0.068  66
+## 2409         99 El Conquistador Extra Pale Ale    1460 0.048  44
+## 2410         99         Shipwrecked Double IPA    1459 0.092  75
+##                               Style Ounces           Brewery_Name      City
+## 2405                     Doppelbock     16 Tröegs Brewing Company   Hershey
+## 2406                   American IPA     12 Tröegs Brewing Company   Hershey
+## 2407               Belgian Pale Ale     32        Mission Brewery San Diego
+## 2408                   American IPA     32        Mission Brewery San Diego
+## 2409        American Pale Ale (APA)     32        Mission Brewery San Diego
+## 2410 American Double / Imperial IPA     32        Mission Brewery San Diego
+##      State
+## 2405    PA
+## 2406    PA
+## 2407    CA
+## 2408    CA
+## 2409    CA
+## 2410    CA</code></pre>
 </div>
 <div id="address-the-na-values" class="section level2">
 <h2>Address the NA values</h2>
@@ -586,16 +601,18 @@ ABV_IBU_by_state %&gt;% ggplot(aes(x=State,y=median_IBU)) + geom_bar(stat = &#39
 <h2>Find the state with the maximum alcoholic (ABV) beer and the most bitter (IBU) beer</h2>
 <pre class="r"><code>#Max ABV beer
 beers_merge[which(beers_merge$ABV==max(beers_merge$ABV,na.rm = TRUE)),]</code></pre>
-<pre><code>##      Brewery_id                                            Beer_Name Beer_ID   ABV IBU
-## 2048         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565 0.128  NA
-##                 Style Ounces            Brewery_Name    City State
-## 2048 Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO</code></pre>
+<pre><code>##      Brewery_id                                            Beer_Name Beer_ID
+## 2048         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565
+##        ABV IBU            Style Ounces            Brewery_Name    City State
+## 2048 0.128  NA Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO</code></pre>
 <pre class="r"><code>#Max IBU beer
 beers_merge[which(beers_merge$IBU==max(beers_merge$IBU,na.rm = TRUE)),]</code></pre>
-<pre><code>##      Brewery_id                 Beer_Name Beer_ID   ABV IBU                          Style Ounces
-## 1479        375 Bitter Bitch Imperial IPA     980 0.082 138 American Double / Imperial IPA     12
-##                 Brewery_Name    City State
-## 1479 Astoria Brewing Company Astoria    OR</code></pre>
+<pre><code>##      Brewery_id                 Beer_Name Beer_ID   ABV IBU
+## 1479        375 Bitter Bitch Imperial IPA     980 0.082 138
+##                               Style Ounces            Brewery_Name    City
+## 1479 American Double / Imperial IPA     12 Astoria Brewing Company Astoria
+##      State
+## 1479    OR</code></pre>
 <div id="the-highest-abv-beer-is-lee-hill-series-vol.-5---belgian-style-quadrupel-ale.-the-highest-ibu-beer-is-bitter-bitch-imperial-ipa." class="section level4">
 <h4>The highest ABV beer is Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale. The highest IBU beer is Bitter Bitch Imperial IPA.</h4>
 </div>
