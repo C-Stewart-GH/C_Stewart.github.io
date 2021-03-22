@@ -3,6 +3,6 @@ navbar:
   title: "Cameron's Website"
   left:
     - text: "About Me"
-      href: About_Me.html
+      href: index.html
     - text: "Beer Study"
       href: Beer_Study.html
