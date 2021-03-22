@@ -1,0 +1,46 @@
+---
+title: "About Me"
+---
+
+### Name
+Cameron Stewart
+
+### Picture
+![Hiking Angels Landing at Zion National Park](/Users/Camo/Documents/SMU_DS/Doing Data Science/FLS12-Personal_Website/FLS_12_pic_of_me.png)
+
+### Location History
+##### Hometown:  
+Friendswood, TX
+
+##### Current Location:  
+Seattle, WA
+
+##### Also lived in:  
+College Station, TX  
+San Antonio, TX  
+Houston, TX  
+
+### Personal Interests
+Hiking, Traveling, Playing Yard Games, and Fantasy Sports
+
+### Work History
+##### Most Recent Role:  
+Amazon  
+-Program Manager-Global Specialty Fulfillment
+
+##### Past Roles:  
+Schlumberger  
+-Manufacturing Engineer  
+-Quality Engineer  
+
+Toyota  
+-Logistics
+
+### Education
+Southern Methodist University  
+-MS in Data Science (Expected Graduation Aug 2022)
+
+Texas A&M University  
+-BS in Industrial and Systems Engineering (Graduated Dec 2014)
+
+### The other tabs represent other projects/analyses that I have completed.  Please check them out!

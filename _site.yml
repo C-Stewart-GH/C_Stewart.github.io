@@ -1,0 +1,8 @@
+name: "personal-website"
+navbar:
+  title: "Cameron's Website"
+  left:
+    - text: "About Me"
+      href: About_Me.html
+    - text: "Beer Study"
+      href: Beer_Study.html
