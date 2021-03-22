@@ -1,6 +1,6 @@
 rename: "personal-website"
 navbar:
-  title: "Cameron's Website"
+  title: "Cameron's Portfolio"
   left:
     - text: "About Me"
       href: index.html
