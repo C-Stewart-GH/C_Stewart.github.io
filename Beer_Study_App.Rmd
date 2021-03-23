@@ -1,0 +1,380 @@
+---
+title: "Beer_Study_App"
+author: "Cameron Stewart"
+date: "3/21/2021"
+output: html_document
+runtime: shiny
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = FALSE}
+suppressPackageStartupMessages(library(shiny))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+
+states = read.csv("Breweries copy.csv",header = TRUE)
+
+# Define UI for data upload app ----
+ui <- fluidPage(
+  
+  # App title ----
+  titlePanel("Beer_Study_App"),
+  
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+    
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Select a file ----
+      fileInput("file1", "Choose  Beers  CSV File",
+                multiple = FALSE,
+                accept = c("text/csv",
+                         "text/comma-separated-values,text/plain",
+                         ".csv")),
+
+      # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+
+      # Input: Select a file ----
+      fileInput("file2", "Choose Breweries CSV File",
+                multiple =  FALSE,
+                accept = c("text/csv",
+                         "text/comma-separated-values,text/plain",
+                         ".csv")),
+
+      
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+      
+shiny::helpText("Please fill out all selections below before proceeding.Please scroll down to see all selections."),
+      
+                  # Input: Select number of rows to display ----
+      radioButtons("IBU_filter", "Display IBU Data",
+                   choices = c("Yes",
+                               "No"),
+                   selected = "No"),
+      
+                        # Input: Select number of rows to display ----
+      radioButtons("ABV_filter", "Display ABV Data",
+                   choices = c("Yes",
+                               "No"),
+                   selected = "No"),
+      
+          # Input: Select number of rows to display ----
+      radioButtons("chart_type", "Chart type for above selected variables",
+                   choices = c("Histogram",
+                               "Boxplot"),
+                   selected = "Histogram"),
+   
+  # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+            
+                # Input: Select number of rows to display ----
+      radioButtons("Scatter", "Turn on scatterplot of IBU vs ABV",
+                   choices = c("Yes",
+                               "No"),
+                   selected = "No"),
+      
+                  # Input: Select number of rows to display ----
+      radioButtons("lin_reg", "Turn on linear regression line for scatterplot?",
+                   choices = c("Yes",
+                               "No"),
+                   selected = "No"),
+
+  # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+     tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+
+                   # Input: Select number of rows to display ----
+      radioButtons("max_vals", "Turn on display of top 5 highest values for variables above   selected? The top table is sorting by IBU and the bottom table is sorting by ABV. The tables will be hidden if the variable is not selected or the selection on this question is 'No'",
+                   choices = c("Yes",
+                               "No"),
+                   selected = "No"), 
+      
+helpText("-----------------"),
+helpText("Filter data in visuals/tables produced with selections below"),
+
+                      # Input: Select number of rows to display ----
+      radioButtons("state_filter_bool", "Turn on filter by state",
+                   choices = c("Yes",
+                               "No"),
+                   selected = "No"),       
+      
+       selectInput("state_selection", "What state are you filtering to?",
+         choices = sort(states$State))
+      
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Data file ----
+      tableOutput("contents1"),
+      
+            # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+
+            # Output: Data file ----
+      tableOutput("contents2"),
+      
+                  # Horizontal line ----
+      tags$hr(),
+                  # Horizontal line ----
+      tags$hr(),
+      
+      plotOutput(outputId = "IBU_chart_output"),
+      
+      plotOutput(outputId = "ABV_chart_output"),
+      
+      plotOutput(outputId = "scatter_chart_output"),
+      
+      tableOutput("contents3"),
+      
+      tableOutput("contents4")
+    )
+  )
+)
+
+
+# Define server logic to read selected file ----
+server <- function(input, output) {
+
+  output$contents1 <- renderTable({
+    req(input$file1)
+    beers <- read.csv(input$file1$datapath)
+      return(head(beers))
+  })
+  
+  output$contents2 <- renderTable({
+    req(input$file2)
+    breweries <- read.csv(input$file2$datapath)
+      return(head(breweries))
+  })  
+    
+beers_merge <- reactive({
+
+    inFile1 <- input$file1
+
+    if (is.null(inFile1))
+      return(NULL)
+    beers <- read.csv(inFile1$datapath, header=TRUE)
+    colnames(beers)[1]="Beer_Name"
+    beers$Beer_ID = as.factor(beers$Beer_ID)
+    beers$Brewery_id = as.factor(beers$Brewery_id)
+    beers$Style = as.factor(beers$Style)
+    
+    inFile2 = input$file2
+    if (is.null(inFile2))
+      return(NULL)
+    breweries <- read.csv(inFile2$datapath, header=TRUE)
+    colnames(breweries)[2] = "Brewery_Name"
+    breweries$Brew_ID = as.factor(breweries$Brew_ID)
+    breweries$City = as.factor(breweries$City)
+    breweries$State = as.factor(breweries$State)
+    
+    beers_merge=merge(beers,breweries,by.x = "Brewery_id", by.y = "Brew_ID")
+    return(beers_merge)
+})
+    
+    output$IBU_chart_output =
+          renderPlot({
+            req(input$IBU_filter == "Yes")
+            
+            if(input$state_filter_bool == "Yes"){
+              req(input$state_selection)
+              a = "beers_merge() %>% filter(State == input$state_selection) %>% "
+            }
+            else{
+              a = "beers_merge() %>% "
+            }
+              
+            if(input$chart_type == "Histogram") {
+              b = "ggplot(aes(x = IBU))+geom_histogram()+xlab('IBU')+ggtitle('IBU Distribution')"
+            }
+            else{
+              b = "ggplot(aes(x = IBU,y = 'Beers'))+geom_boxplot()+xlab('IBU')+ylab('')+ggtitle('IBU Distribution')"
+            }
+            c = paste(a,b,sep = "")
+            eval(parse(text = c))
+          })
+  
+    output$ABV_chart_output =
+          renderPlot({
+            req(input$ABV_filter == "Yes")
+            
+            if(input$state_filter_bool == "Yes"){
+              req(input$state_selection)
+              d = "beers_merge() %>% filter(State == input$state_selection) %>% "
+            }
+            else{
+              d = "beers_merge() %>% "
+            }
+              
+            if(input$chart_type == "Histogram") {
+              e = "ggplot(aes(x = ABV))+geom_histogram()+xlab('ABV')+ggtitle('ABV Distribution')"
+            }
+            else{
+              e = "ggplot(aes(x = ABV,y = 'Beers'))+geom_boxplot()+xlab('ABV')+ylab('')+ggtitle('ABV Distribution')"
+            }
+            f = paste(d,e,sep = "")
+            eval(parse(text = f))
+          })
+    
+        output$scatter_chart_output =
+          renderPlot({
+            req(input$Scatter == "Yes")
+            
+            if(input$state_filter_bool == "Yes"){
+              req(input$state_selection)
+              g = "beers_merge() %>% filter(State == input$state_selection) %>% ggplot(aes(x = ABV,y = IBU))+geom_point()+xlab('ABV')+ylab('IBU')+ggtitle('IBU vs ABV')"
+            }
+            else{
+              g = "beers_merge() %>% ggplot(aes(x = ABV,y = IBU))+geom_point()+xlab('ABV')+ylab('IBU')+ggtitle('IBU vs ABV')"
+            }
+              
+            if(input$lin_reg == "Yes") {
+              h = "+geom_smooth(method = 'lm')"
+            }
+            else{
+              h = ""
+            }
+            i = paste(g,h,sep = "")
+            eval(parse(text = i))
+          })
+    
+    output$contents3 <- renderTable({
+    req(input$max_vals=="Yes",input$IBU_filter=="Yes")
+      
+    if(input$state_filter_bool == "Yes"){
+      req(input$state_selection)
+      return(head(arrange(beers_merge()[beers_merge()$State == input$state_selection,],desc(IBU))))
+    }
+    else{
+     return(head(arrange(beers_merge(),desc(IBU)))) 
+    }
+      
+    })
+      
+    output$contents4 <- renderTable({
+    req(input$max_vals=="Yes",input$ABV_filter=="Yes")
+    if(input$state_filter_bool == "Yes"){
+      req(input$state_selection)
+      return(head(arrange(beers_merge()[beers_merge()$State == input$state_selection,],desc(ABV))))
+    }
+    else{
+     return(head(arrange(beers_merge(),desc(ABV)))) 
+    }
+     
+    })  
+         
+    }
+
+
+# Run the app ----
+shinyApp(ui = ui, server = server, options = list(height = 1080))
+```

@@ -1,0 +1,13 @@
+name: beer_study_app
+title:
+username:
+account: c-stewart
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3836457
+bundleId: 4382957
+url: https://c-stewart.shinyapps.io/beer_study_app/
+when: 1616474350.29206
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: _site.yml|Beer_Study.html|Beer_Study.Rmd|Beers copy.csv|FLS_12_pic_of_me.png|index.html|index.Rmd|README.md|Untitled.Rmd
